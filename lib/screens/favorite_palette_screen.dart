@@ -1,0 +1,148 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import '../palette.dart';
+import 'package:toast/toast.dart';
+
+class FavoritePaletteScreen extends StatefulWidget {
+  @override
+  _FavoritePaletteScreenState createState() => _FavoritePaletteScreenState();
+}
+
+class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
+  @override
+  void initState() {
+    Provider.of<Palettes>(context, listen: false).fetchData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final key = new GlobalKey<ScaffoldState>();
+    List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
+    List<Palette> listP = tmp.reversed.toList();
+    return Scaffold(
+      backgroundColor:Color(0xFFFFFF).withOpacity(1),
+      key: key,
+      /*appBar: AppBar(
+        title: Text("Favorite palette screen"),
+      ),*/
+      body: SafeArea(
+        child: Stack(
+          children:[
+            Container(
+              alignment: AlignmentDirectional.topEnd,
+              child: SvgPicture.asset("assets/SVG/rectangleHaut.svg"),
+            ),
+            IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+              Navigator.of(context).pop();
+            }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top:60),
+                  child: Text("Favorite", style: TextStyle(
+                      color: Color(0xFF4E59D3),
+                  fontSize: 30),),
+
+                ),
+              ],
+            ),
+            Container(
+              alignment: AlignmentDirectional.bottomStart,
+              child: SvgPicture.asset("assets/SVG/rectangleBas.svg"),
+            ),
+            Container(
+              padding: EdgeInsets.only(top:120),
+              child: ListView.builder(
+                    itemCount: listP.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        //actionExtentRatio: 0.25,
+                        actionExtentRatio: 0.15,
+                        secondaryActions: <Widget>[
+                          IconSlideAction(
+                              //caption: 'Delete',
+                              color: Colors.red,
+                              icon: Icons.delete,
+                              foregroundColor: Colors.white,
+                              onTap: () {
+                                Provider.of<Palettes>(context, listen: false).delete(
+                                    listP[index]
+                                        .id); //removeFromFavoritePalette(index);
+                              }),
+                        ],
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              height: 100,
+                              width: 400,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFEFEFEF),
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3), // changes position of shadow
+                                ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  ...(listP[index]).listColors.map((val) {
+                                    return Container(
+                                          height: 100,
+                                          width: 40,
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 5, ),
+                                          decoration: BoxDecoration(
+                                            color: Color(val).withOpacity(1.0),
+                                            borderRadius:
+                                                BorderRadius.all(Radius.circular(20)),
+                                          ),
+                                        );
+                                  }).toList(),
+                                   IconButton(
+                                      icon: Icon(Icons.copy),
+                                      onPressed: () {
+                                        String s = "";
+                                        for (int i = 0;
+                                            i < listP[index].listColors.length;
+                                            i++) {
+                                          s += (listP[index].listColors[i])
+                                                  .toRadixString(16) +
+                                              " ";
+                                        }
+                                        Clipboard.setData(new ClipboardData(text: "$s"));
+                                        Toast.show(
+                                          "$s copied to Clipboard",
+                                          context,
+                                          duration: 2,
+                                          gravity: Toast.TOP,
+                                          backgroundRadius: 30,
+                                        );
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                          ],
+                        ),
+                      );
+                    }),
+            ),]
+        ),
+      ),
+    );
+  }
+}
