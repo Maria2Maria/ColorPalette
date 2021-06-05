@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../custom_icons_icons.dart';
 import '../palette.dart';
 import 'package:toast/toast.dart';
 
@@ -22,15 +23,14 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var h=MediaQuery.of(context).size.height;
+    var w=MediaQuery.of(context).size.width;
     final key = new GlobalKey<ScaffoldState>();
     List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
     List<Palette> listP = tmp.reversed.toList();
     return Scaffold(
       backgroundColor:Color(0xFFFFFF).withOpacity(1),
       key: key,
-      /*appBar: AppBar(
-        title: Text("Favorite palette screen"),
-      ),*/
       body: SafeArea(
         child: Stack(
           children:[
@@ -38,14 +38,14 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
               alignment: AlignmentDirectional.topEnd,
               child: SvgPicture.asset("assets/SVG/rectangleHaut.svg"),
             ),
-            IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+            IconButton(icon: Icon(CustomIcons.back), onPressed: (){
               Navigator.of(context).pop();
             }),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  padding: EdgeInsets.only(top:60),
+                  padding: EdgeInsets.only(top:h*0.07),
                   child: Text("Favorite", style: TextStyle(
                       color: Color(0xFF4E59D3),
                   fontSize: 30),),
@@ -58,7 +58,7 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
               child: SvgPicture.asset("assets/SVG/rectangleBas.svg"),
             ),
             Container(
-              padding: EdgeInsets.only(top:120),
+              margin: EdgeInsets.only(top:h*0.14),
               child: ListView.builder(
                     itemCount: listP.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -81,12 +81,12 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              height: 100,
-                              width: 400,
+                              margin: EdgeInsets.only(top: h*0.02),
+                              height: h*0.15,
+                              width: w*0.87,
                               decoration: BoxDecoration(
                                 color: Color(0xFFEFEFEF),
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                borderRadius: BorderRadius.all(Radius.circular(30)),
                                 boxShadow: [BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 3,
@@ -99,20 +99,27 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   ...(listP[index]).listColors.map((val) {
-                                    return Container(
-                                          height: 100,
-                                          width: 40,
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 5, ),
-                                          decoration: BoxDecoration(
-                                            color: Color(val).withOpacity(1.0),
-                                            borderRadius:
-                                                BorderRadius.all(Radius.circular(20)),
-                                          ),
-                                        );
+                                    return Column(
+                                      children: [
+                                        Container(
+                                              //height: 100,
+                                              //width: 40,
+                                              height: h*0.09,
+                                              width: w*0.08,
+                                              margin: EdgeInsets.only(
+                                                  top: h*0.02, ),
+                                              decoration: BoxDecoration(
+                                                color: Color(val).withOpacity(1.0),
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(30)),
+                                              ),
+                                            ),
+                                        Text("#${val.toRadixString(16)}",style: TextStyle(fontSize: 10),)
+                                      ],
+                                    );
                                   }).toList(),
                                    IconButton(
-                                      icon: Icon(Icons.copy),
+                                      icon: Icon(CustomIcons.copy),
                                       onPressed: () {
                                         String s = "";
                                         for (int i = 0;
@@ -135,7 +142,6 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 10,),
                           ],
                         ),
                       );

@@ -1,3 +1,4 @@
+import 'package:color_palette0/custom_icons_icons.dart';
 import 'package:color_palette0/screens/generate_palette_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,78 +23,94 @@ class _ThemePaletteScreenState extends State<ThemePaletteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var h=MediaQuery.of(context).size.height;
+    var w=MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xFFE5E5E5),
-     /* appBar: AppBar(
-        title: Text("Theme screen"),
-      ),*/
+      backgroundColor:Color(0xECEDF3).withOpacity(1),
       body: SafeArea(
-            child: Stack(
-        children: [
+        child: Stack(
+          children: [
             Container(
               alignment: AlignmentDirectional.topEnd,
               child: SvgPicture.asset("assets/SVG/rectangleHaut.svg"),
             ),
             Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top:50),
-                child: SvgPicture.asset("assets/SVG/myPalette.svg"),
-
-              ),
-            ],
-          ),
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top:h*0.067),
+                  child: SvgPicture.asset("assets/SVG/myPalette.svg"),
+                ),
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                 Container(
-                   padding: EdgeInsets.only(top: 150),
-                   child: Text(
-                      "Palette size",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                 ),
-
+                Container(
+                  margin: EdgeInsets.only(top:h*0.17),
+                  child: Text(
+                    "Palette size",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 200),
-              padding: EdgeInsets.symmetric(horizontal: 50),
+              margin: EdgeInsets.only(top:h*0.22),
+              padding: EdgeInsets.symmetric(horizontal: h*0.08),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FlatButton(
-                    onPressed: () {
-                      if (size > 3)
-                        setState(() {
-                          size--;
-                        });
-                    },
-                    child: SvgPicture.asset(
-                      "assets/SVG/minus.svg",
-                      fit: BoxFit.cover,
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: RaisedButton(
+                      color:Color(0xA0A6E7).withOpacity(1.0),
+                      shape: RoundedRectangleBorder(
+
+                          borderRadius: BorderRadius.circular(100)),
+                      child: Text(
+                        "-",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 40),
+                      ),
+                      onPressed: () {
+                        if (size > 3)
+                          setState(() {
+                            size--;
+                          });
+                      },
                     ),
                   ),
-                  //IconButton(icon: Icon(), onPressed: onPressed)
                   Text(
                     "$size",
                     style: TextStyle(fontSize: 40),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      if (size < 6)
-                        setState(() {
-                          size++;
-                        });
-                    },
-                    child: SvgPicture.asset(
-                      "assets/SVG/add.svg",
-                      fit: BoxFit.cover,
+                  Container(
+                    width: 50,
+                    height: 50,
+                    child: RaisedButton(
+                      color: Color(0xA0A6E7).withOpacity(1.0),
+                      shape: RoundedRectangleBorder(
+
+                          borderRadius: BorderRadius.circular(100)),
+                      child: Text(
+                        "+",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30),
+                      ),
+                      onPressed: () {
+                        if (size < 6)
+                          setState(() {
+                            size++;
+                          });
+                      },
                     ),
-                  )
+                  ),
+
                 ],
               ),
+
             ),
             Container(
               alignment: AlignmentDirectional.bottomStart,
@@ -103,9 +120,7 @@ class _ThemePaletteScreenState extends State<ThemePaletteScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  //color: Colors.red,
-                  padding: EdgeInsets.only(top: 260),
-                 // margin: EdgeInsets.symmetric(horizontal: 100),
+                  margin: EdgeInsets.only(top:h*0.34),
                   child: Text(
                     "Palette mode",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -113,47 +128,45 @@ class _ThemePaletteScreenState extends State<ThemePaletteScreen> {
                 ),
               ],
             ),
-            // SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                    padding: EdgeInsets.only(top: 300),
-                    width: 340,
-                    //color: Colors.red,
-                    // height: 400,
-                    child: GridView(
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          childAspectRatio: 3 / 2,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 20,
-                        ),
-                        children: [
-
-                          ...listTones.map((val) {
-                            return GestureDetector(
-                              child: SvgPicture.asset(val["path"]),
-                              onTap: () {
-                                setState(() {
-                                  type = val["tone"];
-                                });
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (_) {
+                  //padding: EdgeInsets.only(top: 300),
+                  margin: EdgeInsets.only(top:h*0.39),
+                  width: 340,
+                  //color: Colors.red,
+                  // height: 400,
+                  child: GridView(
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 20,
+                      ),
+                      children: [
+                        ...listTones.map((val) {
+                          return GestureDetector(
+                            child: SvgPicture.asset(val["path"]),
+                            onTap: () {
+                              setState(() {
+                                type = val["tone"];
+                              });
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) {
                                   return GeneratePaletteScreen(size, type);
                                 }),
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ]
-                    ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ]),
                 ),
               ],
             ),
-        ],
+          ],
+        ),
       ),
-          ),
     );
   }
 }

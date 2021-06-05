@@ -81,6 +81,11 @@ flutter:
     - assets/SVG/myPalette.svg
     - assets/SVG/rgb.svg
     - assets/SVG/generate.svg
+    - assets/SVG/get_start.svg
+    - assets/SVG/logo.svg
+    - assets/SVG/groupe_rec.svg
+    - assets/SVG/rectangle_b.svg
+    - assets/SVG/rectangle_h.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -93,10 +98,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/Icons/CustomIcons.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

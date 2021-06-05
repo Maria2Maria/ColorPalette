@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'palette.dart';
 
+
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: StartScreen(),
-      //home: TestWidget(),
+      //home: MySlider(),
     );
   }
 }
