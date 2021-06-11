@@ -4,7 +4,6 @@ import 'package:color_palette0/custom_icons_icons.dart';
 import 'package:color_palette0/google_icons_icons.dart';
 import 'package:color_palette0/resources/col_font_stg.dart';
 import 'package:color_palette0/screens/favorite_palette_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -398,7 +397,7 @@ class _GeneratePaletteScreenState extends State<GeneratePaletteScreen> {
                               });
                             },
                           ),
-                          IconButton(icon: isfavorite ? Icon(Icons.favorite,color: favorite_onC,size: h*0.035,)
+                          IconButton(icon: isfavorite ? Icon(Icons.favorite,color: red,size: h*0.035,)
                               :Icon(CustomIcons.favorite_off,color: favorite_offC,size:h*0.035),
                               constraints: BoxConstraints(maxHeight: h*0.035),
                               onPressed: () {

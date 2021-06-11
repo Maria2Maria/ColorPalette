@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 const Color lightpurple= Color(0xFFECEDF3);
 const Color purple= Color(0xFF4E59D3);
 const Color favorite_offC=Color(0xFF979797);
-const Color favorite_onC=Colors.red;
 const Color white=Colors.white;
 const Color black=Colors.black;
 const Color barriercolor=Color.fromRGBO(16, 16, 16,0.2);
 const Color shadowcolor=Color.fromRGBO(0, 0, 0,0.15);
 const Color lightgrey=Color(0xFFEFEFEF);
+//RGB slider colors
+const Color Sred=Color(0xFFF60909);
+const Color Sgreen=Color(0xFF12F816);
+const Color Sblue=Color(0xFF0508C9);
+const Color inactivecolor=Color.fromRGBO(0, 0, 0,0.2);
+const Color red=Colors.red;
+const Color green=Colors.green;
 
 
 //Palette theme rectangles
@@ -42,6 +48,10 @@ String title1= "Palette size";
 String title2= "Palette mode";
 String generate="Generate";
 String favorite="Favorite";
+String sliderBlue="Blue";
+String sliderRed="Red";
+String sliderGreen="Green";
+String sliderAlpha="Alpha";
 
 String wtones="Warm tones";
 String ctones="Cold tones";
@@ -57,6 +67,6 @@ TextStyle tonesTextStyle(double size){
       fontFamily: ftype1,
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w500,
-      color: Colors.white,
+      color: white,
       fontSize: size);
 }
