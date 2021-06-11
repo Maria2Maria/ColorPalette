@@ -4,40 +4,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 
 class StartScreen extends StatelessWidget {
-  //The home screen
   @override
   Widget build(BuildContext context) {
     var h=MediaQuery.of(context).size.height;
     var w=MediaQuery.of(context).size.width;
     return Scaffold(
-      /*floatingActionButton: FlatButton(
-        child: Container(
-          color: Colors.red,
-          //height: 50,
-            margin: EdgeInsets.fromLTRB(w*0.298,h*0.86,0,0),
-            child: SvgPicture.asset("assets/SVG/get_started.svg" ),
-        ),
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(
-              builder:(_){
-                return ThemePaletteScreen();
-              } ));
-        },
-      ),*/
-
       body:SafeArea(
         child: Stack(
           children: [
             Container(
-
-              //margin:EdgeInsets.only(right:0),
-              //margin:EdgeInsets.only(left: h*0.25),
               alignment: AlignmentDirectional.topEnd,
               child: Container(
-                  //color:Colors.red,
                   height: h*0.38,
                   width: w*0.74,
-                  child: SvgPicture.asset("assets/SVG/rectangle_h.svg",fit:BoxFit.fill)),
+                  child: SvgPicture.asset("assets/SVG/rectangle_h.svg",fit:BoxFit.fill),
+              ),
             ),
             Container(
               width: w*0.48,
@@ -51,15 +32,9 @@ class StartScreen extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(w*0.33,h*0.42,0,0),
               child: SvgPicture.asset("assets/SVG/groupe_rec.svg"),
             ),
-            /*Container(
-              alignment: AlignmentDirectional.topEnd,
-              child: SvgPicture.asset("assets/SVG/rectangle_h.svg"),
-            ),*/
             Container(
-              //color: Colors.red,
               alignment: AlignmentDirectional.bottomStart,
               child: Container(
-                //color: Colors.yellow,
                 width: w*0.88,
                   height: h*0.41,
                   child: SvgPicture.asset("assets/SVG/rectangle_b.svg",fit:BoxFit.fill),
@@ -77,15 +52,8 @@ class StartScreen extends StatelessWidget {
               ),
             ),
         Container(
-          //color: Colors.red,
           margin: EdgeInsets.fromLTRB(w*0.27,h*0.78,0,0),
           child: MaterialButton(
-            //height: h*0.05,
-            //minWidth: w*0.4,
-            //color: Colors.red,
-            /*shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(12),
-            ),*/
             onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(
                   builder:(_){
@@ -98,29 +66,6 @@ class StartScreen extends StatelessWidget {
                 child: SvgPicture.asset("assets/SVG/get_start.svg",fit:BoxFit.fill)),
           ),
         ),
-      /*RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-          //side: BorderSide(color: Colors.red)
-        ),
-        color: Colors.white,
-        child: Text("Get stated >",style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),*/
-             /*RaisedButton(
-
-               child: Container(
-                color: Colors.red,
-                margin: EdgeInsets.fromLTRB(w*0.298,h*0.86,0,0),
-                child: SvgPicture.asset("assets/SVG/get_started.svg" ),
-            ),
-               onPressed: (){
-                 Navigator.of(context).push(MaterialPageRoute(
-                     builder:(_){
-                       return ThemePaletteScreen();
-                     } ));
-               },
-             ),*/
           ],
         ),
       ),

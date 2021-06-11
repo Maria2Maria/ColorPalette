@@ -57,20 +57,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/SVG/warmTones.svg
-    - assets/SVG/monochrome.svg
-    - assets/SVG/coldTones.svg
-    - assets/SVG/darkTones.svg
-    - assets/SVG/brightTones.svg
-    - assets/SVG/Rectangle42.svg
-    - assets/SVG/rectangleBas.svg
-    - assets/SVG/rectangleHaut.svg
-    - assets/SVG/myPalette.svg
-    - assets/SVG/get_start.svg
-    - assets/SVG/logo.svg
-    - assets/SVG/groupe_rec.svg
-    - assets/SVG/rectangle_b.svg
-    - assets/SVG/rectangle_h.svg
+    - assets/SVG/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,3 +1,4 @@
+import 'package:color_palette0/resources/col_font_stg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,68 +25,75 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var h=MediaQuery.of(context).size.height;
-    var w=MediaQuery.of(context).size.width;
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     final key = new GlobalKey<ScaffoldState>();
-     List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
+    List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
     List<Palette> listP = tmp.reversed.toList();
     return Scaffold(
-      backgroundColor:Color(0xFFFFFF).withOpacity(1),
+      backgroundColor: white,
       key: key,
-      body: SafeArea(
-        child: Stack(
-          children:[
-            Container(
-              alignment: AlignmentDirectional.topEnd,
-              child: Container(
-                  width: w*0.8,
-                  height: h*0.14,
-                  child: SvgPicture.asset("assets/SVG/rectangleHaut.svg",fit:BoxFit.fill)),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(w*0.01,h*0.045, 0,0),
-              child: IconButton(icon: Icon(CustomIcons.back,size: h*0.026,), onPressed: (){
+      body: Stack(children: [
+        Container(
+          alignment: AlignmentDirectional.topEnd,
+          child: Container(
+              width: w * 0.8,
+              height: h * 0.14,
+              child: SvgPicture.asset("assets/SVG/rectangleHaut.svg",
+                  fit: BoxFit.fill),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(w * 0.01, h * 0.045, 0, 0),
+          child: IconButton(
+              icon: Icon(
+                CustomIcons.back,
+                size: h * 0.026,
+              ),
+              onPressed: () {
                 Navigator.of(context).pop();
               }),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top:h*0.07),
-                  child: Text("Favorite", style: TextStyle(
-                      color: Color(0xFF4E59D3),
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontSize: h*0.03
-                  ),
-                  ),
-
-                ),
-              ],
-            ),
-            Container(
-              alignment: AlignmentDirectional.bottomStart,
-              child: Container(
-                  width: w*0.88,
-                  height: h*0.41,
-                  child: SvgPicture.asset("assets/SVG/rectangleBas.svg",fit:BoxFit.fill)),
-            ),
-            Container(
-              margin: EdgeInsets.only(top:h*0.14),
-              child: ListView.builder(
-                    itemCount: listP.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return FavPalette(listP[index],context,h,w);
-                    }),
-            ),]
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: h * 0.07),
+              child: Text(
+                favorite,
+                style: TextStyle(
+                    color: purple,
+                    fontFamily: ftype1,
+                    fontStyle: FontStyle.normal,
+                    fontSize: h * 0.03),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          alignment: AlignmentDirectional.bottomStart,
+          child: Container(
+              width: w * 0.88,
+              height: h * 0.41,
+              child: SvgPicture.asset("assets/SVG/rectangleBas.svg",
+                  fit: BoxFit.fill),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: h * 0.16),
+          child: ListView.builder(
+            padding: EdgeInsets.only(top: 0),
+              itemCount: listP.length,
+              itemBuilder: (BuildContext context, int index) {
+                return FavPalette(listP[index], context, h, w);
+              }),
+        ),
+      ]),
     );
   }
 }
 
-Widget FavPalette(Palette p,BuildContext context,var h,var w){
+Widget FavPalette(Palette p, BuildContext context, var h, var w) {
   return Slidable(
     actionPane: SlidableDrawerActionPane(),
     actionExtentRatio: 0.15,
@@ -96,25 +104,24 @@ Widget FavPalette(Palette p,BuildContext context,var h,var w){
           foregroundColor: Colors.white,
           onTap: () {
             print("id=${p.id}");
-            Provider.of<Palettes>(context, listen: false).delete(
-                p.id);
+            Provider.of<Palettes>(context, listen: false).delete(p.id);
           }),
     ],
     child: Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: h*0.02),
-          height: h*0.15,
-          width: w*0.87,
+          margin: EdgeInsets.only(top: h * 0.02),
+          height: h * 0.15,
+          width: w * 0.87,
           decoration: BoxDecoration(
-            color: Color(0xFFEFEFEF),
-            borderRadius: BorderRadius.all(Radius.circular(h*0.0369)),
+            color: lightgrey,
+            borderRadius: BorderRadius.all(Radius.circular(h * 0.0369)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.15),
+                color: shadowcolor,
                 spreadRadius: 3,
                 blurRadius: 5,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: Offset(0, 3),
               ),
             ],
           ),
@@ -125,43 +132,48 @@ Widget FavPalette(Palette p,BuildContext context,var h,var w){
                 return Column(
                   children: [
                     Container(
-                      height: h*0.09,
-                      width: w*0.088,
+                      height: h * 0.09,
+                      width: w * 0.088,
                       margin: EdgeInsets.only(
-                        top: h*0.02, ),
+                        top: h * 0.02,
+                      ),
                       decoration: BoxDecoration(
-                        color:Color(val).withOpacity(1.0),
+                        color: Color(val).withOpacity(1.0),
                         borderRadius: BorderRadius.all(Radius.circular(30)),
-
                       ),
                       child: Neumorphic(
                           style: NeumorphicStyle(
-                            boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(30))),
-                            depth: -5,
-                            shadowDarkColorEmboss: Colors.black.withOpacity(0.75),
-                            shadowLightColorEmboss: Color(val).withOpacity(1.0),
-                            color: Color(val).withOpacity(1.0),)
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.all(Radius.circular(30)),
+                        ),
+                        depth: -5,
+                        shadowDarkColorEmboss: Colors.black.withOpacity(0.75),
+                        shadowLightColorEmboss: Color(val).withOpacity(1.0),
+                        color: Color(val).withOpacity(1.0),
+                      ),
                       ),
                     ),
-                    Text("#${val.toRadixString(16)}",style: TextStyle(
-                        fontFamily: 'Roboto',
+                    Text(
+                      "#${val.toRadixString(16)}",
+                      style: TextStyle(
+                        fontFamily: ftype1,
                         fontStyle: FontStyle.normal,
-                        fontSize: h*0.013,
-                      fontWeight: FontWeight.w400,
-                    ),)
+                        fontSize: h * 0.013,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
                   ],
                 );
               }).toList(),
               IconButton(
-                icon: Icon(CustomIcons.copy,size: h*0.03,),
+                icon: Icon(
+                  CustomIcons.copy,
+                  size: h * 0.03,
+                ),
                 onPressed: () {
                   String s = "";
-                  for (int i = 0;
-                  i < p.listColors.length;
-                  i++) {
-                    s += (p.listColors[i])
-                        .toRadixString(16) +
-                        " ";
+                  for (int i = 0; i < p.listColors.length; i++) {
+                    s += (p.listColors[i]).toRadixString(16) + " ";
                   }
                   Clipboard.setData(new ClipboardData(text: "$s"));
                   Toast.show(
