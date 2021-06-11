@@ -1,59 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../custom_icons_icons.dart';
 
-class MySlider extends StatefulWidget {
-  @override
-  _MySliderState createState() => _MySliderState();
-}
-
-class _MySliderState extends State<MySlider> {
-  Color C=Colors.red;
-  @override
-  Widget build(BuildContext context) {
-
-    RgbPicker p = RgbPicker(
-      r: 33.0,
-      g: 66.0,
-      b: 99.0,
-      a:1.0,
-    );
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("slider"),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        showDialog<Color>(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return p;
-            }).then((Color c) {
-          if (c != null) {
-            setState(() {
-              C=c;
-            });
-            print("RED");
-            print(C.red);
-            print("GREEN");
-            print(c.green);
-            print("BLUE");
-            print(c.blue);
-          }
-        });
-      }),
-      body: Center(
-        child: Text(
-          "Hello",
-          style: TextStyle(
-            fontSize: 40,
-            color: C,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class RgbPicker extends StatefulWidget {
   RgbPicker({this.r, this.g, this.b,this.a});
@@ -71,12 +20,15 @@ class RgbPickerState extends State<RgbPicker> {
 
   @override
   Widget build(BuildContext context) {
+    var h=MediaQuery.of(context).size.height;
+    var w=MediaQuery.of(context).size.width;
     return AlertDialog(
-
+        //contentPadding = EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
       //backgroundColor: Color.fromRGBO(16, 16, 16,0.2),
-        contentPadding: EdgeInsets.all(0.0),
+        //contentPadding: EdgeInsets.all(0.0),
+      contentPadding:EdgeInsets.symmetric(horizontal: w*0.07) ,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
+            borderRadius: BorderRadius.circular(h*0.0367),
         ),
 
         content: IntrinsicWidth(
@@ -87,46 +39,50 @@ class RgbPickerState extends State<RgbPicker> {
                 Row(
                   mainAxisAlignment:MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon: Icon(Icons.clear,size: 40,),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.red,),
-                    IconButton(icon: Icon(CustomIcons.validate),color:Colors.green,
-                      onPressed: () {
-                      Color c = Color.fromRGBO( r.round(), g.round(), b.round(),a);
-                      Navigator.pop(context, c);
-                    },),
+                    Container(
+                      //margin: EdgeInsets.only(top:h*0.01),
+                      child: IconButton(icon: Icon(Icons.clear,size: h*0.045,),
+                        //constraints: BoxConstraints(maxHeight: h*0.055),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        color: Colors.red,),
+                    ),
+                    Container(
+                      //margin: EdgeInsets.only(top:h*0.01),
+                      child: IconButton(icon: Icon(CustomIcons.validate,size: h*0.03,),color:Colors.green,
+                        onPressed: () {
+                        Color c = Color.fromRGBO( r.round(), g.round(), b.round(),a);
+                        Navigator.pop(context, c);
+                      },),
+                    ),
                 ],),
                 Positioned(
-                  top:-50,
+                  top:-h*0.076,
                   child: Container(
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(r.round(),g.round(),b.round(),a),
-                        borderRadius: BorderRadius.circular(10)
+                        borderRadius: BorderRadius.circular(h*0.0246)
 
                     ),
-                    height: 100,
-                    width: 100,
+                    height: h*0.15,
+                    width:h*0.15,
                   ),
                 ),
-
                 SliderTheme(
                   data:SliderThemeData(
-                    thumbShape: RoundSliderThumbShape(enabledThumbRadius:7),
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius:h*0.007),
+                    trackHeight: 2,
                   ),
                   child: Column(
 
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                  SizedBox(height: 40,),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0)),
                   Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  width: 50.0,
-                  height: 40,
+                  margin: EdgeInsets.only(top: h*0.11),
+                  width: w*0.83,
+                  height: h*0.056,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -142,9 +98,18 @@ class RgbPickerState extends State<RgbPicker> {
                   child: Row(
                     children: [
                       Container(
-                        child: Text("Alpha"),
-                        width: 45,
-                        height: 30,),
+                        //color:Colors.red,
+                        margin:EdgeInsets.only(left: h*0.02),
+                        child: Text("Alpha",style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontStyle: FontStyle.normal,
+                            fontSize: h*0.02,
+                            fontWeight: FontWeight.w400),
+
+                        ),
+                        width: w*0.11,
+                        height: h*0.025,
+                      ),
                       Expanded(
                         child: Slider(
                             value: a,
@@ -161,12 +126,10 @@ class RgbPickerState extends State<RgbPicker> {
                     ],
                   ),
                 ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    width: 50.0,
-                    height: 40,
+                    margin: EdgeInsets.only(top: h*0.03),
+                    width: w*0.68,
+                    height: h*0.056,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -182,15 +145,22 @@ class RgbPickerState extends State<RgbPicker> {
                     child: Row(
                       children: [
                         Container(
-                            child: Text("Red"),
-                        width: 45,
-                        height: 30,),
+                          margin:EdgeInsets.only(left: h*0.02),
+                            child: Text("Red",style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontStyle: FontStyle.normal,
+                                fontSize: h*0.02,
+                                fontWeight: FontWeight.w400),
+                            ),
+                          width: w*0.11,
+                          height: h*0.025,
+                        ),
                         Expanded(
                           child: Slider(
                               value: r,
                               min: 0.0,
                               max: 255.0,
-                              activeColor: Colors.red,
+                              activeColor: Color(0xF60909).withOpacity(1),
                               inactiveColor: Colors.grey.shade400,
                               onChanged: (double value) {
                                 setState(() {
@@ -201,11 +171,10 @@ class RgbPickerState extends State<RgbPicker> {
                       ],
                     ),
                   ),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    width: 50.0, height: 40,
+                    margin: EdgeInsets.only(top: h*0.03),
+                    width: w*0.68,
+                    height: h*0.056,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -221,15 +190,21 @@ class RgbPickerState extends State<RgbPicker> {
                     child: Row(
                       children: [
                         Container(
-                            width: 45,
-                            height: 30,
-                            child: Text("Green")),
+                            margin:EdgeInsets.only(left: h*0.02),
+                            width: w*0.12,
+                            height: h*0.025,
+                            child: Text("Green",style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontStyle: FontStyle.normal,
+                                fontSize: h*0.02,
+                                fontWeight: FontWeight.w400),
+                            )),
                         Expanded(
                           child: Slider(
                               value: g,
                               min: 0.0,
                               max: 255.0,
-                              activeColor: Colors.green,
+                              activeColor: Color(0x12F816).withOpacity(1),
                               inactiveColor: Colors.grey.shade400,
                               onChanged: (double value) {
                                 setState(() {
@@ -241,10 +216,11 @@ class RgbPickerState extends State<RgbPicker> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0)),
+                      padding: EdgeInsets.only(top: h*0.03)),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    width: 50.0, height: 40,
+                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    width: w*0.68,
+                    height: h*0.056,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -259,15 +235,23 @@ class RgbPickerState extends State<RgbPicker> {
                     ),
                     child: Row(
                       children: [
-                        Container(width: 45,
-                            height: 30,
-                            child: Text("Blue")),
+                        Container(
+                            margin:EdgeInsets.only(left: h*0.02),
+                            width: w*0.11,
+                            height: h*0.025,
+                            child: Text("Blue",style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontStyle: FontStyle.normal,
+                                fontSize: h*0.02,
+                                fontWeight: FontWeight.w400),
+                            ),
+                        ),
                         Expanded(
                           child: Slider(
                               value: b,
                               min: 0.0,
                               max: 255.0,
-                              activeColor: Colors.blue,
+                              activeColor: Color(0x0508C9).withOpacity(1),
                               inactiveColor: Colors.grey.shade400,
                               onChanged: (double value) {
                                 setState(() {
@@ -279,7 +263,7 @@ class RgbPickerState extends State<RgbPicker> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0)),
+                      padding: EdgeInsets.only(top:0.046*h)),
               ]),
                 ),
               ])

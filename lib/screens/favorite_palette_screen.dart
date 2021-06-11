@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -26,7 +27,7 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
     var h=MediaQuery.of(context).size.height;
     var w=MediaQuery.of(context).size.width;
     final key = new GlobalKey<ScaffoldState>();
-    List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
+     List<Palette> tmp = Provider.of<Palettes>(context).listPalettes;
     List<Palette> listP = tmp.reversed.toList();
     return Scaffold(
       backgroundColor:Color(0xFFFFFF).withOpacity(1),
@@ -36,11 +37,17 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
           children:[
             Container(
               alignment: AlignmentDirectional.topEnd,
-              child: SvgPicture.asset("assets/SVG/rectangleHaut.svg"),
+              child: Container(
+                  width: w*0.8,
+                  height: h*0.14,
+                  child: SvgPicture.asset("assets/SVG/rectangleHaut.svg",fit:BoxFit.fill)),
             ),
-            IconButton(icon: Icon(CustomIcons.back), onPressed: (){
-              Navigator.of(context).pop();
-            }),
+            Container(
+              margin: EdgeInsets.fromLTRB(w*0.01,h*0.045, 0,0),
+              child: IconButton(icon: Icon(CustomIcons.back,size: h*0.026,), onPressed: (){
+                Navigator.of(context).pop();
+              }),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -48,107 +55,128 @@ class _FavoritePaletteScreenState extends State<FavoritePaletteScreen> {
                   padding: EdgeInsets.only(top:h*0.07),
                   child: Text("Favorite", style: TextStyle(
                       color: Color(0xFF4E59D3),
-                  fontSize: 30),),
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontSize: h*0.03
+                  ),
+                  ),
 
                 ),
               ],
             ),
             Container(
               alignment: AlignmentDirectional.bottomStart,
-              child: SvgPicture.asset("assets/SVG/rectangleBas.svg"),
+              child: Container(
+                  width: w*0.88,
+                  height: h*0.41,
+                  child: SvgPicture.asset("assets/SVG/rectangleBas.svg",fit:BoxFit.fill)),
             ),
             Container(
               margin: EdgeInsets.only(top:h*0.14),
               child: ListView.builder(
                     itemCount: listP.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Slidable(
-                        actionPane: SlidableDrawerActionPane(),
-                        //actionExtentRatio: 0.25,
-                        actionExtentRatio: 0.15,
-                        secondaryActions: <Widget>[
-                          IconSlideAction(
-                              //caption: 'Delete',
-                              color: Colors.red,
-                              icon: Icons.delete,
-                              foregroundColor: Colors.white,
-                              onTap: () {
-                                Provider.of<Palettes>(context, listen: false).delete(
-                                    listP[index]
-                                        .id); //removeFromFavoritePalette(index);
-                              }),
-                        ],
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: h*0.02),
-                              height: h*0.15,
-                              width: w*0.87,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFEFEFEF),
-                                borderRadius: BorderRadius.all(Radius.circular(30)),
-                                boxShadow: [BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 3,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3), // changes position of shadow
-                                ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  ...(listP[index]).listColors.map((val) {
-                                    return Column(
-                                      children: [
-                                        Container(
-                                              //height: 100,
-                                              //width: 40,
-                                              height: h*0.09,
-                                              width: w*0.08,
-                                              margin: EdgeInsets.only(
-                                                  top: h*0.02, ),
-                                              decoration: BoxDecoration(
-                                                color: Color(val).withOpacity(1.0),
-                                                borderRadius:
-                                                    BorderRadius.all(Radius.circular(30)),
-                                              ),
-                                            ),
-                                        Text("#${val.toRadixString(16)}",style: TextStyle(fontSize: 10),)
-                                      ],
-                                    );
-                                  }).toList(),
-                                   IconButton(
-                                      icon: Icon(CustomIcons.copy),
-                                      onPressed: () {
-                                        String s = "";
-                                        for (int i = 0;
-                                            i < listP[index].listColors.length;
-                                            i++) {
-                                          s += (listP[index].listColors[i])
-                                                  .toRadixString(16) +
-                                              " ";
-                                        }
-                                        Clipboard.setData(new ClipboardData(text: "$s"));
-                                        Toast.show(
-                                          "$s copied to Clipboard",
-                                          context,
-                                          duration: 2,
-                                          gravity: Toast.TOP,
-                                          backgroundRadius: 30,
-                                        );
-                                      },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return FavPalette(listP[index],context,h,w);
                     }),
             ),]
         ),
       ),
     );
   }
+}
+
+Widget FavPalette(Palette p,BuildContext context,var h,var w){
+  return Slidable(
+    actionPane: SlidableDrawerActionPane(),
+    actionExtentRatio: 0.15,
+    secondaryActions: <Widget>[
+      IconSlideAction(
+          color: Colors.red,
+          icon: Icons.delete,
+          foregroundColor: Colors.white,
+          onTap: () {
+            print("id=${p.id}");
+            Provider.of<Palettes>(context, listen: false).delete(
+                p.id);
+          }),
+    ],
+    child: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: h*0.02),
+          height: h*0.15,
+          width: w*0.87,
+          decoration: BoxDecoration(
+            color: Color(0xFFEFEFEF),
+            borderRadius: BorderRadius.all(Radius.circular(h*0.0369)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                spreadRadius: 3,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ...(p).listColors.map((val) {
+                return Column(
+                  children: [
+                    Container(
+                      height: h*0.09,
+                      width: w*0.088,
+                      margin: EdgeInsets.only(
+                        top: h*0.02, ),
+                      decoration: BoxDecoration(
+                        color:Color(val).withOpacity(1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+
+                      ),
+                      child: Neumorphic(
+                          style: NeumorphicStyle(
+                            boxShape:NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(30))),
+                            depth: -5,
+                            shadowDarkColorEmboss: Colors.black.withOpacity(0.75),
+                            shadowLightColorEmboss: Color(val).withOpacity(1.0),
+                            color: Color(val).withOpacity(1.0),)
+                      ),
+                    ),
+                    Text("#${val.toRadixString(16)}",style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontStyle: FontStyle.normal,
+                        fontSize: h*0.013,
+                      fontWeight: FontWeight.w400,
+                    ),)
+                  ],
+                );
+              }).toList(),
+              IconButton(
+                icon: Icon(CustomIcons.copy,size: h*0.03,),
+                onPressed: () {
+                  String s = "";
+                  for (int i = 0;
+                  i < p.listColors.length;
+                  i++) {
+                    s += (p.listColors[i])
+                        .toRadixString(16) +
+                        " ";
+                  }
+                  Clipboard.setData(new ClipboardData(text: "$s"));
+                  Toast.show(
+                    "$s copied to Clipboard",
+                    context,
+                    duration: 2,
+                    gravity: Toast.TOP,
+                    backgroundRadius: 30,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }

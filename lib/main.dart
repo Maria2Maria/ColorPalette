@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: StartScreen(),
+      theme: ThemeData(
+        fontFamily: "Roboto",
+
+      ),
       //home: MySlider(),
     );
   }

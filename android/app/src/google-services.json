@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "670959262498",
+    "firebase_url": "https://color-palette-b5f31-default-rtdb.firebaseio.com",
     "project_id": "color-palette-b5f31",
     "storage_bucket": "color-palette-b5f31.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:670959262498:android:a72ea361a5fef1e898a37b",
+        "mobilesdk_app_id": "1:670959262498:android:a47e48fcd31aaa4898a37b",
         "android_client_info": {
           "package_name": "com.example.color_palette0"
         }

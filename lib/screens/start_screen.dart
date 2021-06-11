@@ -30,11 +30,14 @@ class StartScreen extends StatelessWidget {
           children: [
             Container(
 
-              //height: 200,
-              //width: 200,
-              margin:EdgeInsets.only(left: h*0.25),
-              //alignment: AlignmentDirectional.topEnd,
-              child: SvgPicture.asset("assets/SVG/rectangle_h.svg"),
+              //margin:EdgeInsets.only(right:0),
+              //margin:EdgeInsets.only(left: h*0.25),
+              alignment: AlignmentDirectional.topEnd,
+              child: Container(
+                  //color:Colors.red,
+                  height: h*0.38,
+                  width: w*0.74,
+                  child: SvgPicture.asset("assets/SVG/rectangle_h.svg",fit:BoxFit.fill)),
             ),
             Container(
               width: w*0.48,
@@ -48,19 +51,29 @@ class StartScreen extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(w*0.33,h*0.42,0,0),
               child: SvgPicture.asset("assets/SVG/groupe_rec.svg"),
             ),
-            Container(
+            /*Container(
               alignment: AlignmentDirectional.topEnd,
               child: SvgPicture.asset("assets/SVG/rectangle_h.svg"),
-            ),
+            ),*/
             Container(
+              //color: Colors.red,
               alignment: AlignmentDirectional.bottomStart,
-              child: SvgPicture.asset("assets/SVG/rectangle_b.svg"),
+              child: Container(
+                //color: Colors.yellow,
+                width: w*0.88,
+                  height: h*0.41,
+                  child: SvgPicture.asset("assets/SVG/rectangle_b.svg",fit:BoxFit.fill),
+              ),
             ),
             Container(
               margin:EdgeInsets.fromLTRB(w*0.35,h*0.13, 0,0),
               child: Text(
                 "welcome to",
-                style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: h*0.024,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
               ),
             ),
         Container(
@@ -79,7 +92,10 @@ class StartScreen extends StatelessWidget {
                     return ThemePaletteScreen();
                   } ));
             },
-            child: SvgPicture.asset("assets/SVG/get_started.svg" ),
+            child: Container(
+              width:w*0.4,
+                height: h*0.05,
+                child: SvgPicture.asset("assets/SVG/get_start.svg",fit:BoxFit.fill)),
           ),
         ),
       /*RaisedButton(

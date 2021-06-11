@@ -25,6 +25,7 @@ class Palettes with ChangeNotifier{
       id: json.decode(res.body)['name'],
       listColors: listColors,
     ));
+    print("idName=$id ");
     notifyListeners();
   }catch(e){
     throw e;
@@ -58,7 +59,8 @@ class Palettes with ChangeNotifier{
      listPalettes.removeAt(index);
     notifyListeners();
     var res=await http.delete(Uri.parse(url));
-    if(res.statusCode>=400){
+    if(res.statusCode>=500){ //de base c'est 400
+      print("${res.statusCode}");
       listPalettes.insert(index,Item);
       notifyListeners();
       print("could not delete item");
