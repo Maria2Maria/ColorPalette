@@ -49,6 +49,7 @@ class RgbPickerState extends State<RgbPicker> {
                       child: IconButton(icon: Icon(CustomIcons.validate,size: h*0.03,),color: green,
                         onPressed: () {
                         Color c = Color.fromRGBO( r.round(), g.round(), b.round(),a);
+                        print("alpha=${c.opacity}");
                         Navigator.pop(context, c);
                       },),
                     ),
@@ -153,7 +154,6 @@ class RgbPickerState extends State<RgbPicker> {
                         ),
                         Expanded(
                           child: Slider(
-                              //divisions: 255,
                               value: r,
                               min: 0.0,
                               max: 255.0,

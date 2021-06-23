@@ -33,6 +33,16 @@ dependencies:
   flutter_palette:
   flutter_colorpicker: ^0.4.0
   flutter_neumorphic: ^3.1.0
+  flutter_launcher_icons:
+  path:
+  path_provider:
+  sqflite:
+
+flutter_icons:
+  image_path: "assets/SVG/logo_icon.jpg"
+  android: true
+  ios: true
+
 
 
 

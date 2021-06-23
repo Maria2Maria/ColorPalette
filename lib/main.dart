@@ -1,3 +1,4 @@
+import 'package:color_palette0/screens/controler.dart';
 import 'package:color_palette0/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +8,9 @@ import 'palette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<Palettes>(create: (context) => Palettes()),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(ChangeNotifierProvider(
+      create:(_)=> Palettes(),
+    child:MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: StartScreen(),
+      //home: Test_API(),
       theme: ThemeData(
         fontFamily: "Roboto",
 

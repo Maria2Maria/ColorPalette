@@ -536,3 +536,95 @@ class _ThemePaletteScreenState extends State<ThemePaletteScreen> {
     );
   }
 }
+
+
+/*
+Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ...(p).listColors.map((val) {
+                return Column(
+                  children: [
+                    Container(
+                      height: h * 0.09,
+                      width: w * 0.088,
+                      margin: EdgeInsets.only(
+                        top: h * 0.02,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(val).withOpacity(1.0),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      child: Neumorphic(
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.all(Radius.circular(30)),
+                          ),
+                          depth: -5,
+                          shadowDarkColorEmboss: Colors.black.withOpacity(0.75),
+                          shadowLightColorEmboss: Color(val).withOpacity(1.0),
+                          color: Color(val).withOpacity(1.0),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "#${val.toRadixString(16)}",
+                      style: TextStyle(
+                        fontFamily: ftype1,
+                        fontStyle: FontStyle.normal,
+                        fontSize: h * 0.013,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    )
+                  ],
+                );
+              }).toList(),
+
+            ],
+          ) :
+              Container(
+                width: w*0.8,
+                child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+            ...(p).listColors.map((val) {
+          return Column(
+            children: [
+              Container(
+                height: h * 0.09,
+                width: w * 0.088,
+                margin: EdgeInsets.only(
+                  top: h * 0.02,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(val).withOpacity(1.0),
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
+                child: Neumorphic(
+                  style: NeumorphicStyle(
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(30)),
+                    ),
+                    depth: -5,
+                    shadowDarkColorEmboss: Colors.black.withOpacity(0.75),
+                    shadowLightColorEmboss: Color(val).withOpacity(1.0),
+                    color: Color(val).withOpacity(1.0),
+                  ),
+                ),
+              ),
+              Text(
+                "#${val.toRadixString(16)}",
+                style: TextStyle(
+                  fontFamily: ftype1,
+                  fontStyle: FontStyle.normal,
+                  fontSize: h * 0.013,
+                  fontWeight: FontWeight.w400,
+                ),
+              )
+            ],
+          );
+        }).toList(),
+
+      ],
+    ),
+ */
